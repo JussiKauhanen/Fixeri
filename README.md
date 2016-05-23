@@ -1,2 +1,2 @@
 # Fixeri
-General tool for maintaining windows
+General tool for maintaining windows (HTA + Powershell)

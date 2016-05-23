@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="x-ua-compatible" content="ie=10">   
+    <meta charset="utf-8"/>
+    <title>Fixeri</title>
+     <link href="http://fonts.googleapis.com/css?family=Fjalla+One|Raleway:400,700" rel="stylesheet" />
+
+    <HTA:APPLICATION
+        ID = "Fixeri"
+        APPLICATIONNAME="Fixeri"
+        BORDER="none"
+        BORDERSTYLE="normal"
+        INNERBORDER="no"
+        CAPTION="Asennus"
+        CONTEXTMENU="no"
+        ICON="lataus.ico"
+        MAXIMIZEBUTTON="yes"
+        MINIMIZEBUTTON="yes"
+        NAVIGABLE="no"
+        SCROLL="no"
+         SHOWINTASKBAR="yes"
+        SINGLEINSTANCE="no">
+    </HTA>
+   
+  </head>
+    <style type="text/css" title="">       
+        *{
+             margin:0;
+            padding:0;
+        }
+        html{
+            overflow:hidden;
+        }
+       
+        body{
+            font:15px/1.3 'Raleway', sans-serif;
+            color: #fff;
+            width:100%;
+            height:100%;
+            position:absolute;
+            overflow:hidden;
+        }       
+
+        a, a:visited {
+            outline:none;
+            color:#389dc1;
+         }
+
+        a:hover{
+            text-decoration:none;
+        }
+
+        section, footer, header, aside{
+            display: block;
+        }
+       
+
+        h2 {
+            font-family: 'Federo', sans-serif;
+         }
+		h5 {  
+			font-family: 'Fjalla One', sans-serif;
+			align:center;
+			margin: 0 auto;
+			top: 20px;
+			left: 20px;
+			text-align: center;
+			position:absolute;
+			color:#fff; 
+			font-weight:500;	
+			font-size:40px; 
+		}
+        #stage{
+            width:100%;
+            height:100%;
+            position:absolute;
+            top:0;
+            left:0;
+
+            transition:top 0.4s;
+        }
+
+        #stage > div{  /* The step divs */
+            height:100%;
+            position:relative;
+        }
+
+
+        #stage h1{
+            font-weight:normal;
+            font-size:48px;
+            text-align:center;
+            color:#fff;
+            margin-bottom:60px;
+        }
+
+        .pageContent{
+            position:absolute;
+            text-align:center;
+            left:5%;
+            top:7%;
+            width:100%;
+			transition: all 0.3s ease; 
+        }
+
+        .button{
+            width:240px;
+            height:70px;
+            text-align:center;
+            text-decoration: none !important;
+             color:#fff !important;
+            font-family:115px/1.3 'Raleway', sans-serif;
+            font-weight: bold;
+            border-radius:1px;
+            display:block;
+            line-height:70px;
+             box-shadow:6px 6px 0 rgba(0,0,0,0.08);
+            cursor: pointer;
+            font-size:18px;
+            margin:10px auto;
+            opacity:0.9;
+            transition: all 0.3s ease;       
+         }
+
+        .button:hover{
+            opacity:1;
+            box-shadow:-6px 6px 0 rgba(0,0,0,0.08);
+        }
+
+        .button.userSelection{
+			position:absolute;
+			left: 10px;
+			top: 0px;
+			width: 70px;
+			height: 70px;
+			z-index:9999;
+        }	
+
+        .button.resend{
+			font-size:11px;
+			line-height:40px;
+		    width:60px;
+            height:40px;
+            position:relative;
+			float:right;
+			right: 20px;
+            background-color:#92cd84;
+        } 
+
+        .button.resendText{
+			font-size:14px;
+			line-height:60px;
+			top:-10px;
+		    width:380px;
+            height:60px;
+            position:relative;
+			float:left;
+			left: 20px;
+            text-align:left;
+            text-decoration: none !important;
+             color:#000 !important;
+            background-color:#fff;
+			box-shadow:6px 6px 0 rgba(0,0,0,0.0);
+			cursor:default;
+        } 		
+		
+        .button.green{
+            background-color:#92cd84;
+			position:relative;
+			left: -65px;
+			width:110px;		
+        }
+		
+        .button.greentwo{
+            background-color:#92cd84;
+			position:relative;
+			top:-80px;
+			left: 65px;
+			width:110px;	
+        }	
+
+        .button.greenthree{
+            background-color:#b0dbe5;
+			position:relative;
+			top:-130px;
+			left: -55px;
+			width:130px;
+        }	
+
+        .button.greenfour{	
+			background-color:#b0dbe5;		
+			position:relative;
+			top:-209px;
+			left: 75px;
+			width:90px;				
+        }			
+		
+        .button.orange{
+            background-color:#ED755A;
+			position:relative;
+			top:-140px;
+        }		
+
+        .button.magenta{
+            background-color:#e661b7;
+			position:relative;
+			top:-200px;
+        }		
+		
+        .button.blue{
+		    position:relative;
+            background-color:#798dd7;
+			top:-70px;
+			left: -40px;
+			width:160px;
+        }
+		
+        .button.bluetwo{
+            background-color:#798dd7;
+			position:relative;
+            top:-150px;
+			left: 85px;
+			width:70px;
+			font-size:30px;
+			font-weight:1000;
+        }					
+       
+        .button.save{
+		    position:relative;
+            background-color:#D75D48;
+			top:-80px;
+        } 
+
+        .button.close{
+            position:relative;
+            background-color:#D75D48;
+            top:-100px;
+			vertical-align:text-top;
+        } 	
+        .button.close p{
+            position:relative;
+            top:-215px;
+        } 			
+
+        #step1{
+            background-color:#75c0d1;
+        }
+
+        #step1 .content{    margin-top: -140px;}
+
+        footer{
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            margin-left: -120px;
+        }
+   
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: -10;
+        }
+
+        .modalData, .modalHistory {
+            width: 500px;
+            height: 400px;
+            line-height: 200px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -200px;
+            margin-left: -250px;
+            background-color: #C5DCD6;
+            border-radius: 5px;
+            text-align: center;
+            z-index: -11; /* 1px higher than the overlay layer */
+        }
+		
+        .modalUser, .modalHistory {
+			height: 310px;
+            background-color: #f8f8f8;
+			padding:8px;
+			box-shadow: 0 15px 35px rgba(2, 2, 50, 0.3);			
+        }	
+
+        .modalUser {
+		    position:absolute;
+	        z-index: 1;
+			background-color: #fff;
+			height: 100px;
+			top: 0px;
+			left: 0px;
+			width: 60px;
+			height: 100%;
+			box-shadow: 0 15px 35px rgba(2, 2, 50, 0.3);
+        }			
+		
+        .modalHistory {
+			top: 40%;
+			height: 510px;
+            background-color: #f8f8f8;
+			padding:0px;		
+        }			
+		
+        .teksti {
+		    position:relative;
+			float:left;
+			width: 500px;
+			height: 60px;
+			left:-8px;
+            background-color: #fff;
+			margin:8px;
+			box-shadow: 0 15px 35px rgba(2, 2, 50, 0.3);
+			color:#000;				
+        }				
+
+		.userLink {
+			position:relative;
+			float:left;
+			margin:10px;
+			margin-left:-8px;
+			margin-top: 2px;
+			width: 80px;
+			height: 50px;
+			border-radius: 5px;
+			background: rgba(255, 255, 255, 1);
+			text-indent:-9999px;
+			box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);	
+			transition: all 0.3s ease;		
+		}
+
+		.userLink:hover {
+			opacity:0.5;
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);	
+		}	
+	
+		.chrome{
+			background: url("data:image/png;base64,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") 20px 10px no-repeat;
+		}
+		.firefox{
+			background: url("data:image/png;base64,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") 20px 10px no-repeat;
+		margin-top:-16px;
+		}
+		.teamviever{
+			background: url("data:image/png;base64,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") 20px 10px no-repeat;
+			}
+		.hdtune{
+			background: url("data:image/png;base64,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") 20px 10px no-repeat;
+        }
+		.mbam{
+			background: url("data:image/png;base64,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") 20px 10px no-repeat;
+		}
+		.skype{
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASiSURBVFhHzZfbbxRVHMe/Z7alN+p2S2GT1i4g1GKMsammtr6wJV5ifKAFYpSouzSaYnxpjH+Azz4YXzSaoL0Q44VatkYxkQT6IEIxkYIoAStF2K7pxe6WUuy2M3P8nTOn3Z3u2W2RJvpJfjPnNud8z+/3m7Oz+K9h6u6mL9FAPa/AwpPwWFV0z4PHc516BsDZh9jjPe0MvHvcAr4aLYZZ/AGVXnIassD5ZdisEh6UOnXcBLd/g2GcgW0fw4by79DMTNm3AikBYvH5opMw0KBa/j0WYiTubUz43kc7W1CtWlICvvyrh665d36n2LiEPGM/Wn1DqiUDR0DfZAPFdlCW1xqLJ8kbL2JvRa9qcWHIq22/TnEVsV17M1AAbn2O3sm9cq1lOB44MkYZblTLcg7K8hnCWwrRUrkOdWV58FJdcH7axMD4At4dnsO1WUu2ZWAhCcNuxHN+VziUgHGSmpvgxnxEHvcuLZqN/lgS4R9nkFjQTGnjF2zaWJf+hjghME2udZ+yOq9nVYsLdlcWyLG6ecD4g5gYf00NlTgCmEEhoAFZrKOmyLV4ZDSJrccmwY6MwRcZpx3fdO14J3lLeEw3FyXlm/iCe6gicQRwTiccdWaxlqpCOUwgYtx6Ko5rt8iL1JeYt9E9chvNJ6dIhK1GQbYvn0eawQOwY0+oYUqAQccr9WWz9N3LkmbMUHwBzSfieOviLbR+n5B13ThpYM+IqyA182exS3Td4VTcnHu6grJeuNThfIIy/sosItGka9erhw/i+apGUXI8IODcn+EuZf3ROTXI4WES09lQhvgeP4ZIXFeDl17PIvma6p7PNGubmirNA59GqSc7nY/5EN5arGrZEfnQcW7ayYFcvHCvXDvdAzntwJkphMki0b/VA3pCJHJgV8XK3lAseYD1jEzQb36FquakbJ2BnZsKpAX9hajzpfJjke6rs1K0Fgtx/nKgXBRTHvAYwySNCitbYt6ivLiNN36Ko/7bP1HeG0UXLZhO0F9AV/3zZGN0kaSFwB7Uuoqso7YU9v4AOhtJtKY/kbTQdnrSFffNJXnasdIMvgOfjDSJcUsCODO+VsUM3nnEJ++h+9ajs2mDLC9HhEXYIislIeOsXdxTT1wJnCB11zPUkslTT7EoYksJnaaqX5Q7G93CRIjS58gwkwfFuNRrKOi62s4MiG9CFy3VxegL+lXNzTQdRN781D4EYvf134y6hGdgWZwfqDHcT27+4yOSdoEkUiVlkRuzaPthQutW3eK7jsdocfEp6J7HZR5Dbt7tAcHHww8xWIP0ShapliVEjEPbSrG7ugR15QVLMReLDk0l0U9Cu3+nb4EV4q+4wUPbA5kCBF3DrYyZ9A3ncW9vTeE9PHR/SL9AePtRztk+cHNOm0BrYJzz98RS2XcYrj3KbfqPwPlFXQjvyix+mOY/S6UcAgRtD/zM52fqObc6KDmj+tnu0Lh5lpvrD1JFos8BHeIzaubyU4zxZ+nUaoRt1VCi3qN6Z8hiZLWylg3OD3Nz9iDaH6VDwmH1AnRQosg7qZL3Q782MUYnHEOQ3vMACTTpPgrDc5zbxiG86rj9fwTwD4r//fSa3L38AAAAAElFTkSuQmCC") 20px 10px no-repeat;
+		}
+		.norton{
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEeUlEQVRYhcWWWUxcZRTHP2fKzrAUmBFNahvUGBs0plGZB5S2L6RRQxNoY4ymEjXGFxGN+oCRRA2JD6aJS+KLk5pglW32tjApCUVKQOhC1WK6GJaCQVFABaQZfj4c7ty5zr0D1KQ9yZdJ5lv+v3POd879FLfSWhXqVuiurq6ilEjfVIBoFJRSZGU5WFlZhrDj5gEsLi5TkJfJhCeP3xa0PyduAOD3Qbj4Hgy/CAMHYOAgnHsVLn8Mf48lLF9YWMDtdgOshX0ae2pmbH5jANEVOPMS+NKgXYEvHfzZEHCA3wH+LJlrUxAsgksfGbaHw2FKSkoYGBik9MFddHV1bQJg5HVoUSISKoKwK/kIFoA3BfxpwAD7q59hz569jIyMUFZWxvDwsOH45ADH7pTDQk6jSKgQArnifcABwXzjmmMu6Clku0uhlIzKysrYzV8fILoC/kwRiYk6RbBdyW/fPhg6BINPQ/cjEn7vFonA2WKUUvx6tIAnHk2LQbS1tW0QIJADgbw48SJoVXLp/rxsHbHJdujbzpH6HLIybDFhpRRdhx823ZIIMHAAfBlxOd0qXs+dtxaOs6uTczHRtw/mkZdto/yBLDiu4JfQOgALF8VTLZ/BAoGJ/rMh8dnZWdxutw5Qk8nLTzmY+NIJnYVyVlKAkw/poQ85BWZpakPiAMXFxYaw37XjHkY/z4eTa9H0boGrn1kALM+IoBZ6XyZceDM2XV5ejsfjsRSPRCIGcaUUY1Nz0H2HRFJL5/FtFgA/fSgNJt77+IVrh+bn55sC2O12g3hvb69MTByVUtYca1Vw/S8TgL59cvvDLim/U7sNAoODgwaBePN4PIa5mpoaI138vfKmwESLCcDxbXqofOlw6XCCl01NTTERm82WEB1t9Pf3GzdGdkr4wy65iD+8YwLQFkfZYYeZ7gQAgNLS0phQRUUFzc3NBvGqqqrETd89Kx0z7JKWfvYVEwBfut7rkwCYeWyVGh3gOemeYZd8xIYOmQCEb9dT4E2Fia8tARobG03F6+rqzDf0PK6Xtz8TRt4wATi1W+/9/mwYet4SwCoKluZN0aPrTYWxIyYAF96S2td6vy89KUBtba1BvLq62nzhTDd02PQybFOwNG0CMP+9TIbjutbPX1gCzM/PGwDGx8fNF/Y8pkc2WCCf8jgzxi3k1O9BqFBSkcQaGhrIzc2lvr7efMF02OiULx1+fDcJwGSLfPm0DYEc6Lw3KYSlLU2tNaAiy+6aCADQWWJ8C/izoOu+zYnPnhZHQoX6OR02ecyuCxC9biTXWnOHHa58mlx4ZR769yfu9zug637TLea188cZ+OY/HoSKpIQ6boNvK2H0fRj/StI2+gFESkVY63gxeIdE1MKsi3funFyg+HehBhLIlZ7uTZUa92XIw9SwzilzJ3YkDVryV/FqFDrvlnxq1bHeCDnl8rYoQ8e7MQDNrnkhtNZEfOkiENwqKQoWQDBPStabImno3WtoNv8fQLPFa3DlExh+Qfp7ZCd074LTT8L512DKt6njAP4FB9dK6+V6m7EAAAAASUVORK5CYII=")  20px 5px no-repeat;
+			}
+		.fsecure{
+			background: url("data:image/png;base64,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") 17px 5px no-repeat;
+			}		
+		.mcafee{
+			background: url("data:image/png;base64,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") 14px -2px no-repeat;
+			}		
+		.ccleaner{
+			background: url("data:image/png;base64,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") 21px 7px no-repeat;
+		}		
+		.webcam{
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAP8SURBVFhHxZdLTxNRFMcPQ+kDKFAK5aWFID6IBsT4iC5MDCYuNG5cujXGL+Cn8Bu4d2niQhNdEBMXLoSouBAVRUFRLJbSlr5L8f7v3KF37twp44L4S5qZc3rPY+6ce+6dph0G/Uf+KYFyrUYrmTwl8kXKVbaFlqitpZlirUGKd7SS3zCE1hueEljYyNDL1SR92dyias19uM9ookNd7XRhKErj3R1C25iGCSylc/Tw0w9az5eExju9rQG6ceQAjXa2CY0e1wSefVujmeWEkJwEmutTXdquiTsn08MxujLSLyQn2gQeLCzTfCItpDo9IT8NtIUoHPCRQU1CS1SjHcqWqvQrV6A/hbLQ1pmMddLN8WEh2XEk8HjpF734vi4kEzztse4whf0tQuNOtlyhDxtZx6xcPNhL10YHhFTHVrJzv1OO4C2ssCZjXZ6CA4zDeNjJwC/8q+wmkGaZP1pcFZIJXJzo7fznpYXxsLOnQNw/4sjsen76dY3KyrQNswpu8/mEZNLcZC6184NRttx6+BUy9DKwg70M/COODE8AWb1RpgdTONgeFJIJauHySB8d7+ngywxFiStk6OWVAWCvvgrEkWeBW8ytpUjtL9FQgP1pN57qiziCWEB/ur9bSCawhx8ZxEE8C+5tIZnhgkxnwF507S0+1m7tzlSibEY6/PZXpvoBcjwDb/1HNm9KEmrhdQW9rYLuoF/cmegKGPGsajOShZJj+vcbxENcYGTLVX6jgp1PJl2yLx83UiV7J1T9WFhx9RXFUAPCIKlpszKbxQqzsz/QXokb2Mt1IJj6Zt4mUpSXzgEyxeo2vUlsCMkE9m5JW3GNiFI0FhU2dWu5opBMcAh5vpKgb5kcu6/yoLhCxs6ZLduTgz386LDi8s3o3uxH7Z6PHjIVi1DIp5+lRhT4jDj7C0DzunvmKL/nNYBWqgPG79maLW7rp90NjIed2+qS4/EETvdHuKADTzKf2KSMsom4gXEYDzs35Hg8gXi4lQaUvi9TYY/ybj1Ni6msq2Po8T/GYbwbiIN4FrsHks/swHl/fokr9yLI+r5f2hOwyxUbHMtkbk+O0pj6CgCUZwfsm4kbCJZhfcH6eQ0O/3JwUH8MxvWxwYavQmYotUpnlmb51QvwC/8qtgSwcdyaGKUD4ZDQ6AlUSnR1/gmd+/qKXyE3Av7gV7cxOTRhtu3eOXmIxiL6pWlh7JjTbl3dgB/4g18drt8FcIuuN7P8W/s1FP+zQocTi7QYO0wrPXGhrYOvpOnhProUjzmfUsI1AYtkscwTec2OUo0+yywQ+BQ7OSFw1KXNy+yZgAUq/d36Jv8+/LlVsB1gsSQH20O8w030dvFl6hXPCewPRH8B5lTTJiePyS0AAAAASUVORK5CYII=")  24px 6px no-repeat;	
+		}		
+		.jussi{
+			background: url("data:image/png;base64,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") -8px 2px no-repeat;	
+		}		
+		.teknikko{
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAFUUlEQVR4nO2cz0sbaRjH8x/4rzREdGKsM2HQ2CREBLEEBGkiNESGuAjrQUIPgZpelOpBAkqg5hJcqsVAV1lQk9489LYrRJi4rMjiIdBSKEuXZw+7k50kk8yPvJO87/T5wPc2vJr3w7zzvD9mXC4EQRAEQRAEQRAEQRAEQRAEQRAEQRBLhJZPP4alU8C0J7j8s9x3IYP+0bQHhVAWFEJZUAhlQSGUBYVQFhRCWRwvRFzch4n5TRiLpGF4SgK3EOsYLrQGvtkMCNEdCCwVUQiJBJMl8C/kgAutde18I/GICfDNZmAydoBCrIjwzWbAIyZ6FqGV4SkJ/As5FGJExPhc1jYRWmLExX0UohVxcR9Gplf7IqI1Y5E0BJMlFKJkfC47EBGtdwvphz9zQoLJEoxF0gOXocQjJogOYcwJaR2i4qksFA7P4Orjb00pHJ5BPGXtLrLSJikpTAnxzWYaHbCyvg139w+gx939A6ysbxsS0UubHjFBZPhiRohaxrv3H3Q7rZV37z90lUGiTRJSmBDiX8g1fvRu/th0xyns5o81ZZBs0yMmeqq+qBcSWCo25hjpjT3LHaeQ3thr6kCjbcqyDFtbW8DzPPA8DzMzMx3b5EJrzhWiPMSfxl/0LEPhafyFqTbr9ToMDQ2By+VqSj6fb2tTycT8pvOEqIeq6+otMSHX1VtTbZ6fn7fJcLlcwPN8W5vqoWv6+VvnCAkmS42hamV9m5gMhb3CieFrjQgBgLbKy8rQRa2QifnNniogPX7/409T12sNWalUqukarUrO7EoxtULUexdG5gZm+fbtb1PXHx0dNUlJpVJQr9ebrrm7f2gT4pvNsC9EXNxv+lEsoVVWmymDqRSingR2EtKtDB0kWkKE6A7bQlr3NlqrISNlqB5fv/5FWEV7pWXl4U6dkMBSUXdZw2jV0w2zD3UjdFueYVaIEN3RXPRTQ0KImbLXKN0WMY1WW9QJaX1+dKq0jJShnVCqIZLVm1aFZeU5Qp2QTqdF4qlsUwcYKUM7oexptLbZC3p7L+NzWTaFdDusQGKC2DrO29FmLw926oTo/bDC4ZnljiscnsEj/hkUcyJcnfjg9asAkTb1/mdHC3EL1vYvdvPH8Ih/Bj/lBJAvR0Euc1C94BpSrLZp5P91vBCl8vr0+Ytup336/AVW1rf/l1EehVqFg1rFC7UyBzcXow0pZts0+r9+F0LcQgweh5YhvbGnuYx+Xb2F9MYePA4tg1uIQTEngnypkqGkzMHNpRe2Xj4x3eZ3IcSug29XJz6Qyy0yKl6oVTiQyxyU3vht+btKxiJpNoWQOCStldevAlC94KDWJIWDWoWDX3/xwo8/BG0VYnQHkTohnSaGpKTcXIz+J6V/MtwCwxNDraUT4lIuvSCX+yfDLTC8dDIZO7C9c7ZePoHSG3/fZLgFhhcXw1L32TqLYXr5PSydUnWYmkSY36BSH/9xQswcB6JSiJOGLaPzD+qFqI8BsRzHHANSH5RjNY46KOeEu8TKqwlUCwkmS7ov+9MaozuETAkJS/2ZKJLOyPSq5XdEqBfC2tDV61tUTAgJS/atApNOry9/MiMkmCwN7CMBRkPi0xvMCFGk0LisQvJddaaEKLFzz8SKDJJfc2BSSFjCT2tQJyQs/VsS48dnKBISlgbzeSY7P2jGvBAl08/f2vrA94gJEKI7ttwVjhSiFkPyjhmZXgX/Qs52EY4Vos5k7ADG57KmJpXDUxKMRdIgRHcsvWeOQkzePZOxg47p112AQhgKCqEsKISyoBDKgkIoCwqhLCiEsvRdCIIgCIIgCIIgCIIgCIL0kX8AgL8aUwrxjU4AAAAASUVORK5CYII=") -15px -18px no-repeat;
+		}	
+			
+
+			
+        .content {
+            margin: 30px;
+        }
+
+         h1 {
+            font-family: 'Federo', sans-serif;
+        }   
+
+	   textarea#Nimi, textarea#Asia, textarea#Puhelin{
+			font-family: Arial, Helvetica, sans-serif, "Segoe UI","Lucida Grande","Lucida Sans Unicode";
+			 font-size: 16px;
+			width: 400px;
+			height: 50px;
+			top: -50px;
+			border: 6px solid #fff;
+			padding: 5px;
+			resize: none;
+			outline: none;
+			overflow-y: hidden;
+			 -webkit-border-radius: 3px;
+			   -moz-border-radius: 3px;
+					border-radius: 3px;                           
+		}
+		textarea#Puhelin{
+			position: relative;   
+			top:-100px;
+			 font-size: 16px;
+			height: 50px;
+		}   
+		textarea#Asia{
+			position: relative;   
+			top:-150px;
+			font-size: 16px;
+			height: 100px;
+		}   
+		textarea#Nimi:focus, textarea#Asia:focus, textarea#Puhelin:focus {
+			  border: 6px solid #C5DCD6;                               
+		}
+		
+		#panel, #panel2, #panel3, #panel4{
+			position: absolute; 
+			top: -150px;	
+			right:0; 
+			left:0;
+			margin-right:auto; 
+			margin-left:auto;
+			cursor: crosshair;
+			z-index: 2000;		
+			border-radius: 0 0 5px 5px;
+			width: 70%;
+			height: 70px;
+			overflow-y: auto;
+			overflow-x: hidden;
+			background: #fff;
+			border: 6px solid #fff; 
+			padding: 12px 9px 9px; 
+			border-radius: 6px;		
+			box-shadow: 0px 10px 15px rgba(0,0,0,0.3);
+			transition: all .35s ease-in-out;
+		}
+		#panel2{
+			z-index: 3000;	
+			background: #fff;
+			height:70px;
+		}
+
+		#panel h5, #panel2 h5{
+			z-index: 3000;	
+			background: #fff;
+			font-family: 'Fjalla One', sans-serif;
+			align:center;
+			margin: 0 auto;
+			top: 20px;
+			left: 20px;
+			text-align: center;
+			position:absolute;
+			color:#75c0d1; 
+			font-weight:500;	
+			font-size:40px;
+		}				
+    </style>
+
+    <body onload="loadDefaults()">  	
+        <a class="back"></a>
+			<div id="panel" class="panel" onClick='panelHider("panel","100","Buuga Buuga","#000")'>
+				<h5>Paneeli1</h5>
+			</div>
+			<div id="panel2" class="panel2" onClick='panelHider("panel","100","Buuga Buuga","#000")'>
+				<h5>Paneeli2</h5>
+			</div>
+			<div id="panel3" class="panel3" onClick='panelHider("panel","100","Buuga Buuga","#000")'>
+				<h5>Paneeli3</h5>
+			</div>	
+			<div id="panel4" class="panel4" onClick='panelHider("panel","100","Buuga Buuga","#000")'>
+				<h6>Paneeli4</h6>
+			</div>		
+        <div id="stage">	
+             <div id="step1">
+                    <div class="pageContent">						
+                        <h1 id="userNameDisplay">Heippa, valitse toimenpide!</h1>
+						<a class="button encrypt green" onClick="resetIE()">RESET IE</a>
+						<a class="button encrypt greentwo" onClick="resetFox()">RESET FF</a>
+						<a class="button decrypt blue" id="historia" onClick="showHistoryModal('100')">WLAN (0 kpl)</a>			               
+						<a class="button decrypt bluetwo" onClick="rescan()">&#8634;</a>					
+						<a class="button decrypt orange" onClick="shortcuts()">PIKAKUVAKKEET</a>
+                        <a class="button decrypt greenthree" onClick="powersettings()">LEPOTILAT</a>
+						<a class="button decrypt greenfour" onClick="installer('Driverupdater.vbs', 'Driverupdater.vbs', '1', '')">AJURIT</a>
+						<a class="button decrypt magenta" onClick="cleanup()">SIIVOA JÄLJET</a>							
+					</div>
+						<div class="modalUser" id="modalUser">       ´
+							<a class="userLink firefox" id="firefox" onClick="languageCheck('Firefox.exe', 'Firefox_Asennus.exe')"></a>
+							<a class="userLink chrome" id="chrome" onClick="installer('Chrome.exe', 'Chrome_Asennus.exe', 0, '')"></a>
+							<a class="userLink teamviever" id="teamviewer" onClick="installer('TeamViewerQS_fi.exe', 'Stockmann_Etätuki.exe', 0, '')"></a>
+							<a class="userLink mbam" id="mbam" onClick="installer('mbam-setup.exe', 'MBAM_Asennus.exe', 0, ' /SP- /SILENT /NOCANCEL')"></a>
+							<a class="userLink hdtune" id="hdtune" onClick="installer('hdtune.exe', 'Hdtune_Asennus.exe', 0, '')"></a>	
+						    <a class="userLink skype" id="skype" onClick="installer('SkypeSetup.exe', 'Skype_Asennus.exe', 0, '')"></a>	
+						    <a class="userLink norton" id="norton" onClick="installer('Norton_Removal_Tool.exe', 'Norton_Poistaja.exe', 0, '')"></a>							
+						    <a class="userLink fsecure" id="fsecure" onClick="installer('UninstallationTool.exe', 'F_Secure_Poistaja.exe', 0, '')"></a>
+                            <a class="userLink mcafee" id="mcafee" onClick="installer('mcpr.exe', 'McAfee_Poistaja.exe', 0, '')"></a>	
+							<a class="userLink ccleaner" id="ccleaner" onClick="installer('ccleaner.exe', 'CCleaner.exe', 0, '')"></a>								
+							<a class="userLink webcam" id="webcam" onClick="WebcamTest()"></a>							
+						</div> 	
+            </div>
+        </div>
+        <footer>
+		</footer>     
+      <div class="overlay" id="overlay" onClick="showHistoryModal2('-11')"></div>
+		   <div class="modalHistory" id="modalHistory">
+			   <div class="teksti" id="modalHistory">
+				<a class="button encrypt resendText" id="resendText">Jotain juttuu</a>
+				<a class="button encrypt resend" id="resendButton" onClick="resend(1)">Lähetä</a>
+			   </div>   		   
+       </div> 	   	   
+    </body>   	
+   
+    <script Language="VBScript">
+		''Kotoisakolo 2013 KJK
+		window.offscreenBuffering = True		
+		intHorizontal = screen.width - 200
+		intVertical = screen.height
+		window.resizeTo intHorizontal,intVertical
+		window.moveTo 100, 0	
+        Dim watcherTimerID
+        Dim isTeamViewerSessionActive
+        Dim elapsedSessionTime
+		Dim intTimes
+		Dim strKuka
+		Dim arrResend()
+		Dim arrWifiName()
+		Dim mbamRemoval
+		k = 0	
+        elapsedSessionTime = 0
+		hasFocusBeenCalled = 0
+		intTimes = 0
+		strKuka = "Teknikko 3"
+		mbamRemoval = 0
+   
+   
+        Sub loadDefaults
+			If isElevated Then 
+				loadHistory
+				checkSecurity
+				networkMonitor ''HUOM! Blokkaava!
+			Else
+				showUacPrompt	
+			End If
+        End Sub
+
+		
+		Sub showUacPrompt
+			Dim objShell
+			Set objShell = CreateObject("WScript.Shell")		
+			Polku = Chr(34) & objShell.CurrentDirectory & "\Fixeri.hta" & Chr(34)
+			Const Elev = " /elevated"
+			createobject("Shell.Application").ShellExecute "mshta.exe", Polku & Elev, "", "runas", 1
+			window.close
+			wscript.exit
+		End Sub
+		
+
+		Function isElevated
+			Set shell = CreateObject("WScript.Shell")
+			Set whoami = shell.Exec("whoami /groups")
+			Set whoamiOutput = whoami.StdOut
+			strWhoamiOutput = whoamiOutput.ReadAll
+
+			If InStr(1, strWhoamiOutput, "S-1-16-12288", vbTextCompare) Then 
+			isElevated = True
+			Else
+			  isElevated = False
+			End If
+		End Function
+		
+		
+		Sub loadHistory
+		    intHowMany = 0
+			strHistory = ""
+			Dim arrFileLines()
+			i = 0
+			
+			Dim objShell
+			Set objShell = CreateObject("WScript.Shell")
+			objShell.run "%comspec% /c netsh wlan show profiles > ""%userprofile%\Desktop\WlanTemp.txt""",0,true
+
+			UserProfile=objShell.ExpandEnvironmentStrings("%USERPROFILE%")			
+			Const ForReading = 1, ForWriting = 2, ForAppending = 8 
+
+			Set objFSO = CreateObject("Scripting.FileSystemObject")
+			Set objFile = objFSO.OpenTextFile(UserProfile&"\Desktop\WlanTemp.txt", ForReading)
+
+			Do Until objFile.AtEndOfStream
+				Redim Preserve arrFileLines(i)
+				arrFileLines(i) = objFile.ReadLine
+				i = i + 1
+				intHowMany = intHowMany + 1	
+			Loop
+				objFile.Close
+				objShell.run "%comspec% /c del /f /q ""%userprofile%\Desktop\WlanTemp.txt""",0,false
+			On error resume next	
+			For l = Ubound(arrFileLines) to LBound(arrFileLines) Step -1
+				If InStr(arrFileLines(l), ": ") Then
+					arrFields = Split(arrFileLines(l), ": ")
+
+					Redim Preserve arrWifiName(k)
+					arrWifiName(k) = arrFields(1)				
+					strHistory = strHistory & "<div class='teksti' id='modalHistory'>"
+					strHistory = strHistory & "<a class='button encrypt resendText' id='resendText'>" & arrWifiName(k) & "</a>"
+					strHistory = strHistory & "<a class='button encrypt resend' id='resendButton' onClick='resend(" & (k) & ")'>POISTA</a></div> "	
+					k = k + 1	
+				End If				
+			Next		
+				
+			document.getElementById("historia").innerHTML = "WLAN (" & Ubound(arrWifiName)+1 & " kpl)"
+			document.getElementById("modalHistory").style.height = ((Ubound(arrWifiName)+1) * 77) & "px"
+			populateHistoryModal(strHistory)
+		End Sub		
+
+		Sub populateHistoryModal(strHistory)
+			document.getElementById("modalHistory").innerHTML = strHistory
+		End Sub
+
+		
+		Sub showHistoryModal(index)
+		    strShowWhat = document.getElementById("historia").innerHTML
+			If (k = 0) Then
+				Dim objShell
+				Set objShell = CreateObject("WScript.Shell")
+				objShell.Run "%comspec% /c ""rundll32.exe van.dll,RunVAN""",0,false
+				Set objShell = Nothing	
+            Else
+				document.getElementById("modalHistory").style.zIndex = index + 1
+				document.getElementById("overlay").style.zIndex = index			
+			End If
+		End Sub
+		
+		
+		Sub showHistoryModal2(index)
+				document.getElementById("modalHistory").style.zIndex = index + 1
+				document.getElementById("overlay").style.zIndex = index			
+		End Sub		
+
+		
+        Sub checkSecurity
+			Set oWMI = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & "." & "\root\SecurityCenter2")  
+			Set colItems = oWMI.ExecQuery("Select * from AntiVirusProduct")
+			Dim strAntivirus
+			
+			For Each objItem in colItems
+				HexConverter = "00" + Hex(objItem.productState)
+				Status = left(right(HexConverter,4),2)
+				''msgbox objItem.productState & vbcrlf & Hex(objItem.productState) & vbcrlf & left(right(HexConverter,4),2)
+				if Status = "10" OR Status = "11" then Tila = "Aktiivinen, " else Tila = "Pois käytöstä, "
+				Updates = right(HexConverter,2)
+				if Updates = "00" then Tila = Tila + "päivitykset OK" else Tila = Tila + "päivitykset vanhoja"
+				strAntivirus = strAntivirus & objItem.displayName & " - " & Tila & " "
+			Next
+			Window.Document.Title = strAntivirus
+		End Sub		
+		
+
+		Sub networkMonitor
+            pscommand = """function frmMain_Show([String]$card) {function Set-Opacity([Object]$obj) {$frmMain.Opacity = [Single]('.' + ($obj.Text)[0]);$SeperatorMenuItem.Text = 'Opacity ' + $obj.Text;}; function Set-Size([Object]$obj) {if ($frmMain.Width -gt 140) {$frmMain.Width = 140;$frmMain.Height = 47;$frmMain.Left = ($scr.Width - $UIposX);$frmMain.Top = ($scr.Height - $UIposY);} else {$frmMain.Width = 200; $frmMain.Height = $Global:DynamicFormHeight; $frmMain.Left = ($scr.Width - ($UIposX + 60)); $frmMain.Top = ($scr.Height - ($UIposY + ($Global:DynamicFormHeight - 100)));};}; function Get_HddTemp() {$Disks = Get-Disk | Sort-Object -Property 'Number'; foreach($disk in $Disks) {[string]$dpower = ''; [string]$dtemp = ''; [string]$dname = $disk | Select -ExpandProperty 'FriendlyName'; [string]$dtemp = $disk | Get-StorageReliabilityCounter | Select -ExpandProperty 'Temperature'; [string]$dpower = $disk | Get-StorageReliabilityCounter | Select -ExpandProperty 'PowerOnHours'; if ($dtemp.length -lt 1) {$dtemp = '?'}; if ($dpower.length -lt 1) {$dpower = '?'}; $finalText = $finalText + $dname + """ & Chr(34) & """`nTemp: """ & Chr(34) & """ + $dtemp + """ & Chr(34) & """ C `nHours: """ & Chr(34) & """ + $dpower + """ & Chr(34) & """ t`n`n""" & Chr(34) & """; $Global:DynamicFormHeight = $Global:DynamicFormHeight + 53;}; return $finalText; }; Add-Type -Assembly System.Windows.Forms; [Windows.Forms.Application]::EnableVisualStyles(); [void][System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [reflection.assembly]::loadwithpartialname('System.Drawing') | Out-Null; $bmp = New-Object System.Drawing.Bitmap(16,16); $g = [System.Drawing.Graphics]::FromImage($bmp); $g.drawline([System.Drawing.Pens]::LightBlue,0,0,16,0); $g.drawline([System.Drawing.Pens]::LightBlue,0,1,16,1); $g.drawline([System.Drawing.Pens]::LightBlue,0,2,16,2); $g.drawline([System.Drawing.Pens]::LightBlue,0,6,13,6); $g.drawline([System.Drawing.Pens]::LightGreen,0,7,13,7); $g.drawline([System.Drawing.Pens]::LightGreen,0,8,13,8); $g.drawline([System.Drawing.Pens]::LightBlue,0,13,16,13); $g.drawline([System.Drawing.Pens]::LightBlue,0,14,16,14); $g.drawline([System.Drawing.Pens]::LightBlue,0,15,16,15); $g.drawline([System.Drawing.Pens]::LightBlue,0,0,0,15); $g.drawline([System.Drawing.Pens]::LightBlue,1,0,1,15); $g.drawline([System.Drawing.Pens]::LightBlue,2,0,2,15); $ico = [System.Drawing.Icon]::FromHandle($bmp.GetHicon()); $sound = new-object system.media.soundplayer($env:windir + '\Media\chimes.wav'); $fnt = New-Object Drawing.Font('Tahoma', 8, [Drawing.FontStyle]::Bold); $scr = [Windows.Forms.Screen]::PrimaryScreen.Bounds; $rec = New-Object Diagnostics.PerformanceCounter('Network Interface', 'Bytes Received/Sec', $card); $sen = New-Object Diagnostics.PerformanceCounter('Network Interface', 'Bytes Sent/Sec', $card); [void]'{0} {1}' -f $rec.NextValue(), $sen.NextValue(); $frmMain = New-Object Windows.Forms.Form; $row1 = New-Object Windows.Forms.Label; $row2 = New-Object Windows.Forms.Label; $row3 = New-Object Windows.Forms.Label; $mnuIcon = New-Object Windows.Forms.ContextMenu; $SeperatorMenuItem = New-Object Windows.Forms.MenuItem; $mnuOp60 = New-Object Windows.Forms.MenuItem; $mnuOp80 = New-Object Windows.Forms.MenuItem; $mnuOp99 = New-Object Windows.Forms.MenuItem; $mnuSeperator = New-Object Windows.Forms.MenuItem; $mnuExit = New-Object Windows.Forms.MenuItem; $niPopup = New-Object Windows.Forms.NotifyIcon; $tmrTick = New-Object Windows.Forms.Timer; $row1, $row2, $row3 | % {$_.Font = $fnt}; $mnuIcon.MenuItems.AddRange(@($SeperatorMenuItem, $mnuOp60, $mnuOp80, $mnuOp99, $mnuSeperator, $mnuExit)); $row1.ForeColor = [Drawing.Color]::FromArgb(67, 184, 120); $row1.Height = 19; $row1.Location = New-Object Drawing.Point(7, 7); $row1.Text = 'Download'; $row2.ForeColor = [Drawing.Color]::FromArgb(76, 110, 205); $row2.Location = New-Object Drawing.Point(7, 25); $row2.Text = 'Upload'; $row3.ForeColor = [Drawing.Color]::FromArgb(255, 255, 255); $row3.Height = 350; $row3.Width = 175; $row3.Location = New-Object Drawing.Point(7, 65); $row3.Text = 'Temp'; $SeperatorMenuItem.Text = 'Opacity 80%'; $SeperatorMenuItem.add_Click( {} ); $mnuOp60.Text = '60%'; $mnuOp60.Add_Click({Set-Opacity $mnuOp60;$ops = $mnuOp60}); $mnuOp80.Text = '80%'; $mnuOp80.Add_Click({Set-Opacity $mnuOp80;$ops = $mnuOp80}); $mnuOp99.Text = '99%'; $mnuOp99.Add_Click({Set-Opacity $mnuOp99;$ops = $mnuOp99}); $frmMain.Add_MouseHover({Set-Size 300}); $frmMain.Add_MouseLeave({Set-Size 100}); $mnuSeperator.Text = ' '; $mnuSeperator.Add_Click({}); $mnuExit.Text = 'E&xit ' + $card; $mnuExit.Add_Click({$niPopup.Visible = $false;$frmMain.Close()}); $niPopup.ContextMenu = $mnuIcon; $niPopup.Icon = $ico; $niPopup.Text = 'Nettimittari'; $niPopup.Visible = $true; $row3.Text = Get_HddTemp($Temp); $tmrTick.Enabled = $true; $tmrTick.Interval = 1000; $tmrTick.Add_Tick({$row1.Text = ('D: {0:f2} Kb/s' -f ([Math]::Floor($rec.NextValue()) / 1024)); $row2.Text = ('U: {0:f2} Kb/s' -f ([Math]::Floor($sen.NextValue()) / 1024)); if ($Global:HddRefresh -gt 34) {$Global:HddRefresh = 1; $Global:DynamicFormHeight = 140; Get_HddTemp($Temp)} else {$Global:HddRefresh = $Global:HddRefresh + 1};}); Add-Type -AssemblyName System.Windows.Forms;[System.Windows.Forms.Screen]::AllScreens | ForEach-Object {if ($_.Primary -eq $true) {if ($_.Bounds.Width -ne $_.WorkingArea.Width) {$UIposX = 140 + ($_.Bounds.Width -$_.WorkingArea.Width);$UIposY = 47;} elseif ($_.Bounds.Height -ne $_.WorkingArea.Height) {$UIposX = 115; $UIposY = 86; } else {$UIposX = 115; $UIposY = 86;}}}; $frmMain.ClientSize = New-Object Drawing.Size(100, 47); $frmMain.Controls.AddRange(@($row1, $row2, $row3)); $frmMain.FormBorderStyle = [Windows.Forms.FormBorderStyle]::None; $frmMain.Icon = $ico; $frmMain.Location = New-Object Drawing.Point(($scr.Width - $UIposX), ($scr.Height - $UIposY)); $frmMain.Opacity = .8; $frmMain.backcolor = 'black'; $frmMain.ShowInTaskbar = $false; $frmMain.StartPosition = [Windows.Forms.FormStartPosition]::Manual; $frmMain.Text = 'Nettimittari'; $frmMain.TopMost = $true; $sound.play(); [void]$frmMain.ShowDialog(); }; $Global:DynamicFormHeight = 140; $Global:HddRefresh = 1; $activeConnection = get-wmiobject win32_networkadapter -filter 'netconnectionstatus = 2' | select -expand name; $ins = (New-Object Diagnostics.PerformanceCounterCategory('Network Interface')).GetInstanceNames(); for ($i=0; $i -lt $ins.length; $i++) {$ins = (New-Object Diagnostics.PerformanceCounterCategory('Network Interface')).GetInstanceNames(); for ($i=0; $i -lt $ins.length; $i++) {if($d = $ins[$i].Contains($activeConnection)) {frmMain_Show $ins[$i];}};};"""
+			cmd3 = "powershell.exe -WindowStyle Hidden -NoProfile " & pscommand
+            Set oShell = CreateObject("WScript.Shell")
+            intReturnCode = oShell.Run(cmd3, 0, true)		
+		End Sub		
+		
+
+		Sub resetIE
+			strComputer = "."
+			Set objWMIService = GetObject("winmgmts:" _
+			& "{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2")
+			Set colItems = objWMIService.ExecQuery("SELECT * FROM Win32_OperatingSystem")
+			For Each objItem In colItems
+				Select Case objItem.OSLanguage
+					Case 2057 strLanguage = "com"
+					Case 1033 strLanguage = "com"
+					Case 1035 strLanguage = "fi"
+					Case 1053 strLanguage = "se"
+					Case 2077 strLanguage = "se"
+					Case Else strLanguage = "com"
+				End Select
+			Next
+            pscommand = """[void][reflection.assembly]::Load('System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'); $arrIEProcs = 'iexplore'; $continue = $false; do { $arrRunning = @(); foreach ($proc in $arrIEProcs) {if(((get-process $proc -ea SilentlyContinue) -ne $Null)){ $arrRunning += $proc }}; if ($arrRunning.length -gt 0 ) { $d = [System.Windows.Forms.MessageBox]::Show( 'Sinulla on yksi tai useampia IE:n ikkunoita auki.                                      Sulje kaikki ikkunat ja yritä uudelleen.', 'Nollataan IE:n asetuksia...', [System.Windows.Forms.MessageBoxButtons]::RetryCancel, [System.Windows.Forms.MessageBoxIcon]::Warning ); if ($d -eq [Windows.Forms.DialogResult]::Cancel) { exit }} else { $continue = $true; rundll32.exe inetcpl.cpl,ClearMyTracksByProcess 4351 | RunDll32.exe InetCpl.cpl,ResetIEtoDefaults | Out-Null}} while ( $continue -eq $false )"""
+			cmd = "powershell.exe -WindowStyle Hidden -NoProfile " & pscommand
+            Set oShell = CreateObject("WScript.Shell")
+            intReturnCode = oShell.Run(cmd, 0, true)			
+			call panelHider("panel","100","Asetetaan kotisivua...","#000")			
+            pscommand2 = """$homeURL = 'http://google.""" & strLanguage & """'; set-ItemProperty -Path 'HKCU:\Software\Microsoft\Internet Explorer\main' -Name """ & Chr(34) & """Start Page""" & Chr(34) & """ -Value $homeURL"""
+			cmd2 = "powershell.exe -WindowStyle Hidden -NoProfile " & pscommand2
+            Set oShell = CreateObject("WScript.Shell")
+            intReturnCode2 = oShell.Run(cmd2, 0, true)			
+		End Sub
+		
+		
+		Sub resetFox
+            pscommand = """[void][reflection.assembly]::Load('System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'); $arrIEProcs = 'firefox'; $continue = $false; do { $arrRunning = @(); foreach ($proc in $arrIEProcs) {if(((get-process $proc -ea SilentlyContinue) -ne $Null)){ $arrRunning += $proc }}; if ($arrRunning.length -gt 0 ) { $d = [System.Windows.Forms.MessageBox]::Show( 'Sinulla on yksi tai useampia Firefoxin:n ikkunoita auki.                                Sulje kaikki ikkunat ja yritä uudelleen.', 'Nollataan Firefoxin:in asetuksia...', [System.Windows.Forms.MessageBoxButtons]::RetryCancel, [System.Windows.Forms.MessageBoxIcon]::Warning ); if ($d -eq [Windows.Forms.DialogResult]::Cancel) { exit }} else { $continue = $true; Start-Process 'firefox.exe' ' -p'}} while ( $continue -eq $false )"""
+			cmd = "powershell.exe -WindowStyle Hidden -NoProfile " & pscommand
+            Set oShell = CreateObject("WScript.Shell")
+            intReturnCode = oShell.Run(cmd, 0, true)		
+		End Sub		
+		
+		
+		Sub resend(intArr)
+			Dim objShell
+			Set objShell = CreateObject("WScript.Shell")
+			objShell.run "%comspec% /c netsh wlan delete profile name=" & Chr(34) & arrWifiName(intArr) & Chr(34), 0, true
+		    document.getElementById("modalHistory").style.zIndex = "-10"
+            document.getElementById("overlay").style.zIndex = "-11"		
+			Erase arrWifiName
+			k = 0
+			document.getElementById("historia").innerHTML = "WLAN (0 kpl)"
+			loadHistory
+		End Sub	
+
+
+        Sub rescan
+		    call panelHider("panel","100","Haetaan verkkoja...","#000")
+			Erase arrWifiName
+			k = 0
+			document.getElementById("historia").innerHTML = "WLAN (0 kpl)"
+			loadHistory		
+        End Sub	
+
+
+        Sub languageCheck(strDownload, strFile)
+			strComputer = "."
+			Set objWMIService = GetObject("winmgmts:" _
+			& "{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2")
+			Set colItems = objWMIService.ExecQuery("SELECT * FROM Win32_OperatingSystem")
+			For Each objItem In colItems
+				Select Case objItem.OSLanguage
+					Case 2057 strLanguage = "ENG"
+					Case 1033 strLanguage = "ENG"
+					Case 1035 strLanguage = "FI"
+					Case 1053 strLanguage = "SWE"
+					Case 2077 strLanguage = "SWE"
+					Case Else strLanguage = "ENG"
+				End Select
+			Next
+			arrExe = Split(strDownload, ".")
+			strDownload = arrExe(0) & strLanguage & "." & arrExe(1)
+			Installer strDownload, strFile, 0, ""		
+        End Sub	
+		
+		
+        Sub Installer(strDownload, strFile, intBlur, strSwitch)
+		    call panelHider("panel","100","Alustetaan latausta...","#000")
+			pscommand = """Function Get-FileFrom ($url, $FileName) {$EnvVariable = $Env:USERPROFILE; [void] [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [void][System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [reflection.assembly]::loadwithpartialname('System.Drawing') | Out-Null;$EventTimeOut = 35; $bmp = New-Object System.Drawing.Bitmap(16,16); $g = [System.Drawing.Graphics]::FromImage($bmp); $g.drawline([System.Drawing.Pens]::blue,6,1,9,1); $g.drawline([System.Drawing.Pens]::blue,4,2,11,2); $g.drawline([System.Drawing.Pens]::blue,2,3,13,3); $g.drawline([System.Drawing.Pens]::blue,1,4,14,4); $g.drawline([System.Drawing.Pens]::blue,0,5,15,5); $g.drawline([System.Drawing.Pens]::blue,0,6,15,6); $g.drawline([System.Drawing.Pens]::blue,0,7,15,7); $g.drawline([System.Drawing.Pens]::blue,1,8,3,8); $g.drawline([System.Drawing.Pens]::blue,5,8,7,8); $g.drawline([System.Drawing.Pens]::blue,10,8,12,8); $g.drawline([System.Drawing.Pens]::blue,14,8,15,8); $g.drawline([System.Drawing.Pens]::LightGreen,1,10,14,10); $g.drawline([System.Drawing.Pens]::LightGreen,3,12,11,12); $g.drawline([System.Drawing.Pens]::LightGreen,5,14,9,14); $g.drawline([System.Drawing.Pens]::Red,4,4,6,4); $g.drawline([System.Drawing.Pens]::Red,4,5,6,5); $g.drawline([System.Drawing.Pens]::Red,10,4,12,4); $g.drawline([System.Drawing.Pens]::Red,10,5,12,5); $ico = [System.Drawing.Icon]::FromHandle($bmp.GetHicon()); $sound = new-object system.media.soundplayer($env:windir + '\Media\chimes.wav'); $objNotifyIcon = New-Object System.Windows.Forms.NotifyIcon; $objNotifyIcon.Icon = $ico; $objNotifyIcon.BalloonTipIcon = 'Info'; $objNotifyIcon.BalloonTipText = 'Ladataan tiedostoa osoitteesta ' + $url; $objNotifyIcon.BalloonTipTitle = 'Valmistellaan latausta...'; $objNotifyIcon.Visible = $True; $objNotifyIcon.ShowBalloonTip(2000); 'Get-ChildItem C:\Windows'; $dest=$EnvVariable + '\Desktop\' + $FileName; $uri=New-Object System.Uri $url; $request=[System.Net.HttpWebRequest]::Create($uri); $request.set_Timeout(5000); $response=$request.GetResponse(); $totalLength=[System.Math]::Floor($response.get_ContentLength()/1024); $length=$response.get_ContentLength(); $responseStream=$response.GetResponseStream(); $destStream=New-Object -TypeName System.IO.FileStream -ArgumentList $dest, Create; $buffer=New-Object byte[] 10KB; $count=$responseStream.Read($buffer,0,$buffer.length); $downloadedBytes=$count; while ($count -gt 0) {$destStream.Write($buffer, 0, $count); $objNotifyIcon.BalloonTipText = 'Ladattu ' + [System.Math]::Floor($downloadedBytes/1024) + ' kt / ' + $totalLength + ' kt';	$objNotifyIcon.BalloonTipTitle = 'Lataa ' + $FileName + ':ä...'; $objNotifyIcon.Visible = $True; $objNotifyIcon.ShowBalloonTip(2000); $count=$responseStream.Read($buffer,0,$buffer.length); $downloadedBytes+=$count;}; $destStream.Flush(); $destStream.Close(); $destStream.Dispose(); $responseStream.Dispose(); $objNotifyIcon.BalloonTipText = 'Tiedosto ladattu. Aloitetaan asennusta...'; $objNotifyIcon.BalloonTipTitle = 'Valmis!'; $sound.play(); $objNotifyIcon.Visible = $True; $objNotifyIcon.ShowBalloonTip(2000); [string]$Duration=2000; Start-Sleep -Milliseconds $Duration; $objNotifyIcon.Visible = $False; $objNotifyIcon.Dispose();}; Get-FileFrom 'http://dl.dropbox.com/u/35529986/""" & strDownload & """' '""" & strFile & """';"""
+			cmd = "powershell.exe -WindowStyle Hidden -NoProfile " & pscommand
+			Set oShell = CreateObject("WScript.Shell")
+			intReturnCode = oShell.Run(cmd, 0, true)
+			Set objShell = CreateObject("Wscript.Shell")	
+	            objShell.Run "%comspec% /c ""%userprofile%\Desktop\" & strFile & " " & strSwitch & """",0,true
+			If InStr(Lcase(strFile), "mbam") Then
+				mbamRemoval = 1
+				objShell.Run "%comspec% /c ""%homedrive%\Program Files\Malwarebytes' Anti-Malware\mbam.exe"" /update",0,false
+				objShell.Run "%comspec% /c ""%homedrive%\Program Files (x86)\Malwarebytes' Anti-Malware\mbam.exe"" /update",0,false
+				objShell.Run "%comspec% /c ""%homedrive%\Program Files\Malwarebytes Anti-Malware\mbam.exe"" /update",0,false
+				objShell.Run "%comspec% /c ""%homedrive%\Program Files (x86)\Malwarebytes Anti-Malware\mbam.exe"" /update",0,false				
+			End If			
+			If(intBlur) Then
+			    call easing2()	
+			End If
+			Set objShell = Nothing	
+        End Sub		
+		
+		
+		Sub WebcamTest()
+		    strDownload = "WebCamTest.ps1"
+			strFile = "WebCamTest.ps1"
+		    call panelHider("panel","100","Alustetaan latausta...","#000")
+			pscommand = """Function Get-FileFrom ($url, $FileName) {$EnvVariable = $Env:USERPROFILE; [void] [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [void][System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [reflection.assembly]::loadwithpartialname('System.Drawing') | Out-Null;$EventTimeOut = 35; $bmp = New-Object System.Drawing.Bitmap(16,16); $g = [System.Drawing.Graphics]::FromImage($bmp); $g.drawline([System.Drawing.Pens]::blue,6,1,9,1); $g.drawline([System.Drawing.Pens]::blue,4,2,11,2); $g.drawline([System.Drawing.Pens]::blue,2,3,13,3); $g.drawline([System.Drawing.Pens]::blue,1,4,14,4); $g.drawline([System.Drawing.Pens]::blue,0,5,15,5); $g.drawline([System.Drawing.Pens]::blue,0,6,15,6); $g.drawline([System.Drawing.Pens]::blue,0,7,15,7); $g.drawline([System.Drawing.Pens]::blue,1,8,3,8); $g.drawline([System.Drawing.Pens]::blue,5,8,7,8); $g.drawline([System.Drawing.Pens]::blue,10,8,12,8); $g.drawline([System.Drawing.Pens]::blue,14,8,15,8); $g.drawline([System.Drawing.Pens]::LightGreen,1,10,14,10); $g.drawline([System.Drawing.Pens]::LightGreen,3,12,11,12); $g.drawline([System.Drawing.Pens]::LightGreen,5,14,9,14); $g.drawline([System.Drawing.Pens]::Red,4,4,6,4); $g.drawline([System.Drawing.Pens]::Red,4,5,6,5); $g.drawline([System.Drawing.Pens]::Red,10,4,12,4); $g.drawline([System.Drawing.Pens]::Red,10,5,12,5); $ico = [System.Drawing.Icon]::FromHandle($bmp.GetHicon()); $sound = new-object system.media.soundplayer($env:windir + '\Media\chimes.wav'); $objNotifyIcon = New-Object System.Windows.Forms.NotifyIcon; $objNotifyIcon.Icon = $ico; $objNotifyIcon.BalloonTipIcon = 'Info'; $objNotifyIcon.BalloonTipText = 'Ladataan tiedostoa osoitteesta ' + $url; $objNotifyIcon.BalloonTipTitle = 'Valmistellaan latausta...'; $objNotifyIcon.Visible = $True; $objNotifyIcon.ShowBalloonTip(2000); 'Get-ChildItem C:\Windows'; $dest=$EnvVariable + '\Desktop\' + $FileName; $uri=New-Object System.Uri $url; $request=[System.Net.HttpWebRequest]::Create($uri); $request.set_Timeout(5000); $response=$request.GetResponse(); $totalLength=[System.Math]::Floor($response.get_ContentLength()/1024); $length=$response.get_ContentLength(); $responseStream=$response.GetResponseStream(); $destStream=New-Object -TypeName System.IO.FileStream -ArgumentList $dest, Create; $buffer=New-Object byte[] 10KB; $count=$responseStream.Read($buffer,0,$buffer.length); $downloadedBytes=$count; while ($count -gt 0) {$destStream.Write($buffer, 0, $count); $objNotifyIcon.BalloonTipText = 'Ladattu ' + [System.Math]::Floor($downloadedBytes/1024) + ' kt / ' + $totalLength + ' kt';	$objNotifyIcon.BalloonTipTitle = 'Lataa ' + $FileName + ':ä...'; $objNotifyIcon.Visible = $True; $objNotifyIcon.ShowBalloonTip(2000); $count=$responseStream.Read($buffer,0,$buffer.length); $downloadedBytes+=$count;}; $destStream.Flush(); $destStream.Close(); $destStream.Dispose(); $responseStream.Dispose(); $objNotifyIcon.BalloonTipText = 'Tiedosto ladattu. Aloitetaan asennusta...'; $objNotifyIcon.BalloonTipTitle = 'Valmis!'; $sound.play(); & $dest; $objNotifyIcon.Visible = $True; $objNotifyIcon.ShowBalloonTip(2000); [string]$Duration=2000; Start-Sleep -Milliseconds $Duration; $objNotifyIcon.Visible = $False; $objNotifyIcon.Dispose();}; Get-FileFrom 'http://dl.dropbox.com/u/35529986/""" & strDownload & """' '""" & strFile & """';"""
+			cmd = "powershell.exe -WindowStyle Hidden -NoProfile " & pscommand
+			Set oShell = CreateObject("WScript.Shell")
+			intReturnCode = oShell.Run(cmd, 0, true)	
+			window.blur
+			Set objShell = CreateObject("WScript.Shell")
+			UserProfile=objShell.ExpandEnvironmentStrings("%USERPROFILE%")			
+				cmd2 = "powershell.exe -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -Command " & UserProfile & "\Desktop\" & strFile
+				intReturnCode2 = oShell.Run(cmd2, 0, false)						
+		End Sub			
+	
+
+		Sub powersettings
+            Installer "Lepotilat.bat", "Lepotilat.bat", 0, ""
+			Installer "Lepotilat2.vbs", "Lepotilat2.vbs", 0, ""			
+		End Sub		
+
+		Sub cleanup
+			Dim objShell
+			Set objShell = CreateObject("WScript.Shell")
+			If (mbamRemoval = 1) Then
+				strOhjeet15 = "%comspec% /c " & chr(34) & "%homedrive%\Program Files\Malwarebytes Anti-Malware\unins000.exe" & chr(34) & ""
+				strOhjeet16 = "%comspec% /c " & chr(34) & "%homedrive%\Program Files (x86)\Malwarebytes Anti-Malware\unins000.exe" & chr(34) & ""
+			End If
+				strOhjeet1 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\Firefox_Asennus.exe" & chr(34) & ""	
+				strOhjeet2 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\Chrome_Asennus.exe" & chr(34) & ""	
+				strOhjeet3 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\MBAM_Asennus.exe" & chr(34) & ""	
+				strOhjeet4 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\Hdtune_Asennus.exe" & chr(34) & ""	
+				strOhjeet5 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\Skype_Asennus.exe" & chr(34) & ""	
+				strOhjeet6 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\Norton_Poistaja.exe" & chr(34) & ""	
+				strOhjeet7 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\F_Secure_Poistaja.exe" & chr(34) & ""	
+                strOhjeet8 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\McAfee_Poistaja.exe" & chr(34) & ""
+				strOhjeet9 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\CCleaner.exe" & chr(34) & ""		
+				strOhjeet10 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\WebCamTest.ps1" & chr(34) & ""						
+				strOhjeet11 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\Fixeri.hta" & chr(34) & ""	
+				strOhjeet12 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\Lepotilat2.vbs" & chr(34) & ""	
+				strOhjeet13 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\Lepotilat.bat" & chr(34) & ""	
+				strOhjeet14 = "%comspec% /c del /f /q  " & chr(34) & "%userprofile%\Desktop\Driverupdater.vbs" & chr(34) & ""				
+				objShell.Run "%comspec% /c echo " & strOhjeet1 & " > %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet2 & " >> %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet3 & " >> %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet4 & " >> %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet5 & " >> %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet6 & " >> %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet7 & " >> %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet8 & " >> %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet9 & " >> %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet10 & " >> %temp%\FixeriCleanup.bat",0,true  
+				objShell.Run "%comspec% /c echo " & strOhjeet11 & " >> %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet12 & " >> %temp%\FixeriCleanup.bat",0,true
+				objShell.Run "%comspec% /c echo " & strOhjeet13 & " >> %temp%\FixeriCleanup.bat",0,true 
+				objShell.Run "%comspec% /c echo " & strOhjeet14 & " >> %temp%\FixeriCleanup.bat",0,true  
+				objShell.Run "%comspec% /c echo " & strOhjeet15 & " >> %temp%\FixeriCleanup.bat",0,true 
+				objShell.Run "%comspec% /c echo " & strOhjeet16 & " >> %temp%\FixeriCleanup.bat",0,true 				
+                objShell.Run "%comspec% /c ""%temp%\FixeriCleanup.bat""",0,false	
+				objShell.Run "%comspec% /c taskkill /im powershell.exe /f",0,false	
+				Set objShell = Nothing
+				window.close
+		End Sub			
+
+
+        Sub shortcuts
+			'Alkuperäinen idea http://blogs.technet.com/b/deploymentguys/archive/2009/04/08/pin-items-to-the-start-menu-or-windows-7-taskbar-via-script.aspx
+			'Kehittäjä http://frontslash.wordpress.com/2010/03/01/removing-internet-explorer-and-windows-media-player-from-taskbar/#comment-178
+			'Kielen vaihdot, Erikielsiset softat ja EI Microsoftin ohjelmien poistot By Jussi Kauhanen :)
+
+			''Option Explicit
+
+			Const CSIDL_COMMON_PROGRAMS = &H17
+			Const CSIDL_PROGRAMS = &H2
+			Const CSIDL_STARTMENU = &HB
+
+			Dim strComputer
+			Dim objWMIService
+			Dim colOperatingSystems
+			Dim objOperatingSystem
+			Dim strOperatingSystem
+			Dim strOSLanguage
+			Dim colItems
+			Dim ObjItem
+			Dim strUnpin
+			Dim strPinner
+			Dim pinItemText
+			Dim objShell, objFSO, objWshShell
+			Dim objCurrentUserStartFolder
+			Dim strCurrentUserStartFolderPath
+			Dim objAllUsersProgramsFolder
+			Dim strAllUsersProgramsPath
+			Dim objFolder
+			Dim objFolderItem
+			Dim colVerbs
+			Dim objVerb
+			Dim HomeDrive, ProgramData, Userprofile, AppData
+
+			Set objShell = CreateObject("Shell.Application")
+			Set objFSO = CreateObject("Scripting.FileSystemObject")
+			Set objCurrentUserStartFolder = objShell.NameSpace (CSIDL_STARTMENU)
+			strCurrentUserStartFolderPath = objCurrentUserStartFolder.Self.Path
+			Set objAllUsersProgramsFolder = objShell.NameSpace(CSIDL_COMMON_PROGRAMS)
+			strAllUsersProgramsPath = objAllUsersProgramsFolder.Self.Path
+
+			Set objWshShell = CreateObject("WScript.Shell")
+			Set objFSO = CreateObject("Scripting.FileSystemObject") 	
+				Set objShell = CreateObject("Shell.Application")
+				HomeDrive = objWshShell.ExpandEnvironmentStrings("%HOMEDRIVE%")	
+				ProgramData = objWshShell.ExpandEnvironmentStrings("%PROGRAMDATA%")
+				Userprofile = objWshShell.ExpandEnvironmentStrings("%USERPROFILE%")	
+				AppData = objWshShell.ExpandEnvironmentStrings("%APPDATA%")	
+
+
+			' - Remove pinned items -
+
+			' - Check Operating System - '
+			strComputer = "."    
+			set objWMIService = GetObject("Winmgmts:\\" & strComputer)
+			set colOperatingSystems = objWMIService.InstancesOf("win32_OperatingSystem")
+
+			For each objOperatingSystem In colOperatingSystems
+				strOperatingSystem = objOperatingSystem.caption
+			next
+
+			If InStr(strOperatingSystem, "Windows 7") = 0 AND InStr(strOperatingSystem, "Windows 8") = 0 Then
+				wscript.quit
+			End If 
+
+			' - Select right Language -
+			strComputer = "."
+			Set objWMIService = GetObject("winmgmts:" _
+			& "{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2")
+			Set colItems = objWMIService.ExecQuery("SELECT * FROM Win32_OperatingSystem")
+			For Each objItem In colItems
+
+				Select Case objItem.OSLanguage
+					Case 2057 strUnpin = "Unpin from Taskbar"
+					Case 1033 strUnpin = "Unpin from Taskbar"
+					Case 1035 strUnpin = "Poista tämän ohjelman kiinnitys tehtäväpalkista"
+					Case 1053 strUnpin = "Ta bort det här programmet från Aktivitetsfältet"
+					Case 2077 strUnpin = "Ta bort det här programmet från Aktivitetsfältet"
+					Case Else strOSLanguage = "Vika"
+				End Select
+			Next
+
+			If strUnpin = "Ruotsi" Then
+				wscript.quit
+			End If
+
+			If strOSLanguage = "Vika" Then
+				wscript.quit
+			End If
+
+			'Internet Explorer
+			If objFSO.FileExists(strCurrentUserStartFolderPath & "\Programs\Internet Explorer.lnk") Then 
+				Set objFolder = objShell.Namespace(strCurrentUserStartFolderPath & "\Programs")
+				Set objFolderItem = objFolder.ParseName("Internet Explorer.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Internet Explorer WIN8
+			If objFSO.FileExists(AppData & "\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\Internet Explorer.lnk") Then 
+				Set objFolder = objShell.Namespace(AppData & "\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar")
+				Set objFolderItem = objFolder.ParseName("Internet Explorer.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Explorer
+			If objFSO.FileExists(strCurrentUserStartFolderPath & "\Programs\Accessories\Windows Explorer.lnk") Then
+				Set objFolder = objShell.Namespace(strCurrentUserStartFolderPath & "\Programs\Accessories")
+				Set objFolderItem = objFolder.ParseName("Windows Explorer.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Explorer WIN 8
+			If objFSO.FileExists(strCurrentUserStartFolderPath & "\Programs\System Tools\File Explorer.lnk") Then
+				Set objFolder = objShell.Namespace(strCurrentUserStartFolderPath & "\Programs\System Tools")
+				Set objFolderItem = objFolder.ParseName("File Explorer.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Media Player
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Windows Media Player.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath)
+				Set objFolderItem = objFolder.ParseName("Windows Media Player.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Media Player WIN 8
+			''"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Windows Media Player.lnk"
+			If objFSO.FileExists(strCurrentUserStartFolderPath & "\Programs\Windows Accessories\Windows Media Player.lnk") Then
+				Set objFolder = objShell.Namespace(strCurrentUserStartFolderPath & "\Programs\Windows Accessories")
+				Set objFolderItem = objFolder.ParseName("Windows Media Player.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Live Mail Eng ja Sve
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Windows Live Mail.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath)
+				Set objFolderItem = objFolder.ParseName("Windows Live Mail.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Live Mail Eng ja Sve Osa 2
+			On error resume next
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Windows Live\Windows Live Mail.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Windows Live Mail")
+				Set objFolderItem = objFolder.ParseName("Windows Live Mail.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Live Mail Fi
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Windows Liven Sähköposti.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath)
+				Set objFolderItem = objFolder.ParseName("Windows Liven Sähköposti.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Live Mail Fi Osa 2 Jostain syystä feailaa joissain koneissa
+			On error resume next
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Windows Live\Windows Liven Sähköposti.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Windows Liven Sähköposti")
+				Set objFolderItem = objFolder.ParseName("Windows Liven Sähköposti.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Skype
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Skype\Skype.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Skype")
+				Set objFolderItem = objFolder.ParseName("Skype.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Nobu
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Norton Online Backup\Norton Online Backup.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Norton Online Backup")
+				Set objFolderItem = objFolder.ParseName("Norton Online Backup.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Mozilla Firefox
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Mozilla Firefox.lnk") Then
+			Set objFolder = objShell.Namespace(strAllUsersProgramsPath)
+			Set objFolderItem = objFolder.ParseName("Mozilla Firefox.lnk")
+			Set colVerbs = objFolderItem.Verbs
+			For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+			Next
+			End If
+
+			'Chrome
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Google Chrome\Google Chrome.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Google Chrome")
+				Set objFolderItem = objFolder.ParseName("Google Chrome.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Google Chrome WIN 8
+			If objFSO.FileExists(Userprofile & "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Google Chrome\Google Chrome.lnk") Then
+				Set objFolder = objShell.Namespace(Userprofile & "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Google Chrome")
+				Set objFolderItem = objFolder.ParseName("Google Chrome.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			'Nobu2
+			If objFSO.FileExists(strCurrentUserStartFolderPath & "\Programs\Norton Online Backup.lnk") Then
+				Set objFolder = objShell.Namespace(strCurrentUserStartFolderPath & "\Programs\")
+				Set objFolderItem = objFolder.ParseName("Norton Online Backup.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strUnpin Then objVerb.DoIt
+				Next
+			End If
+
+			' - Pin to Taskbar -
+			' - Select right Language -
+			strComputer = "."
+			Set objWMIService = GetObject("winmgmts:" _
+			& "{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2")
+			Set colItems = objWMIService.ExecQuery("SELECT * FROM Win32_OperatingSystem")
+			For Each objItem In colItems
+
+				Select Case objItem.OSLanguage
+					Case 2057 strPinner = "Pin to Taskbar"
+					Case 1033 strPinner = "Pin to Taskbar"
+					Case 1035 strPinner = "Kiinnitä tehtäväpalkkiin"
+					Case 1053 strPinner = "Fäst i Aktivitetsfältet"
+					Case 2077 strPinner = "Fäst i Aktivitetsfältet"
+					Case Else strOSLanguage = "Vika"
+				End Select
+			Next
+
+			If strUnpin = "Ruotsi" Then
+				wscript.quit
+			End If
+
+			If strOSLanguage = "Vika" Then
+				wscript.quit
+			End If
+
+			'Windows Explorer
+			If objFSO.FileExists(strCurrentUserStartFolderPath & "\Programs\Accessories\Windows Explorer.lnk") Then
+				Set objFolder = objShell.Namespace(strCurrentUserStartFolderPath & "\Programs\Accessories")
+				Set objFolderItem = objFolder.ParseName("Windows Explorer.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Explorer WIN 8
+			If objFSO.FileExists(HomeDrive & "\Windows\explorer.exe") Then
+				Set objFolder = objShell.Namespace(HomeDrive & "\Windows")
+				Set objFolderItem = objFolder.ParseName("explorer.exe")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Explorer WIN 8
+			If objFSO.FileExists(strCurrentUserStartFolderPath & "\Programs\System Tools\File Explorer.lnk") Then
+				Set objFolder = objShell.Namespace(strCurrentUserStartFolderPath & "\Programs\System Tools")
+				Set objFolderItem = objFolder.ParseName("File Explorer.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Explorer WIN 8
+			If objFSO.FileExists(strCurrentUserStartFolderPath & "\Programs\Windows System\File Explorer.lnk") Then
+				Set objFolder = objShell.Namespace(strCurrentUserStartFolderPath & "\Programs\Windows System")
+				Set objFolderItem = objFolder.ParseName("File Explorer.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+			'"C:\Users\Jussi\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk"
+			'"C:\Users\Jussi\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk"
+
+			'Microsoft Windows Live Mail Fi
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Windows Live\Windows Liven Sähköposti.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Windows Live")
+				Set objFolderItem = objFolder.ParseName("Windows Liven Sähköposti.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Windows Live Mail Fi Osa 2
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Windows Liven Sähköposti.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath)
+				Set objFolderItem = objFolder.ParseName("Windows Liven Sähköposti.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Windows Live Mail Eng
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Windows Live\Windows Live Mail.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Windows Live")
+				Set objFolderItem = objFolder.ParseName("Windows Live Mail.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Windows Live Mail Eng Osa 2
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Windows Live Mail.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath)
+				Set objFolderItem = objFolder.ParseName("Windows Live Mail.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Windows Media Player
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Windows Media Player.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath)
+				Set objFolderItem = objFolder.ParseName("Windows Media Player.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Internet Explorer
+			If objFSO.FileExists(strCurrentUserStartFolderPath & "\Programs\Internet Explorer.lnk") Then
+				Set objFolder = objShell.Namespace(strCurrentUserStartFolderPath & "\Programs")
+				Set objFolderItem = objFolder.ParseName("Internet Explorer.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Mozilla Firefox
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Mozilla Firefox.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath)
+				Set objFolderItem = objFolder.ParseName("Mozilla Firefox.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Google Chrome
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Google Chrome\Google Chrome.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Google Chrome")
+				Set objFolderItem = objFolder.ParseName("Google Chrome.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Google Chrome WIN 8
+			If objFSO.FileExists(Userprofile & "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Google Chrome\Google Chrome.lnk") Then
+				Set objFolder = objShell.Namespace(Userprofile & "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Google Chrome")
+				Set objFolderItem = objFolder.ParseName("Google Chrome.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Skype
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Skype\Skype.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Skype")
+				Set objFolderItem = objFolder.ParseName("Skype.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Word 2010
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office\Microsoft Word 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Microsoft Office")
+				Set objFolderItem = objFolder.ParseName("Microsoft Word 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Word 2010 Osa 2
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Business "& Chr(40) &"suomi"& Chr(41) &"\Microsoft Word 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Business "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Word 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Word 2010 Osa 3
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Student "& Chr(40) &"suomi"& Chr(41) &"\Microsoft Word 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Student "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Word 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Word 2010 Osa 4
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Student "& Chr(40) &"english"& Chr(41) &"\Microsoft Word 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Student "& Chr(40) &"english"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Word 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+
+			'Microsoft Word 2010 Starter
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Starter "& Chr(40) &"suomi"& Chr(41) &"\Microsoft Word Starter 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Starter "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Word Starter 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Word 2013
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office 2013\Word 2013.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office 2013")
+				Set objFolderItem = objFolder.ParseName("Word 2013.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Word 2010 Starter SVE
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Starter "& Chr(40) &"svenska"& Chr(41) &"\Microsoft Word Starter 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Starter "& Chr(40) &"svenska"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Word Starter 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Word 2007
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office\Microsoft Office Word 2007.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office")
+				Set objFolderItem = objFolder.ParseName("Microsoft Office Word 2007.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Excel 2010
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office\Microsoft Excel 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Microsoft Office")
+				Set objFolderItem = objFolder.ParseName("Microsoft Excel 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Excel 2010 Osa 2
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Business "& Chr(40) &"suomi"& Chr(41) &"\Microsoft Excel 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Business "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Excel 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Excel 2010 Osa 3
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Student "& Chr(40) &"suomi"& Chr(41) &"\Microsoft Excel 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Student "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Excel 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Excel 2010 Osa 4
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Student "& Chr(40) &"english"& Chr(41) &"\Microsoft Excel 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Student "& Chr(40) &"english"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Excel 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Excel 2010 Starter
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Starter "& Chr(40) &"suomi"& Chr(41) &"\Microsoft Excel Starter 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Starter "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Excel Starter 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Excel 2010 Starter SVE
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Starter "& Chr(40) &"svenska"& Chr(41) &"\Microsoft Excel Starter 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Starter "& Chr(40) &"svenska"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Excel Starter 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Excel 2007
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office\Microsoft Office Excel 2007.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office")
+				Set objFolderItem = objFolder.ParseName("Microsoft Office Excel 2007.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Excel 2013
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office 2013\Excel 2013.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office 2013")
+				Set objFolderItem = objFolder.ParseName("Excel 2013.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Powerpoint 2010
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office\Microsoft PowerPoint 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Microsoft Office")
+				Set objFolderItem = objFolder.ParseName("Microsoft Powerpoint.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Powerpoint 2010 Osa 2
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Business "& Chr(40) &"suomi"& Chr(41) &"\Microsoft PowerPoint 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Business "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft PowerPoint 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Powerpoint 2010 Osa 3
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Student "& Chr(40) &"suomi"& Chr(41) &"\Microsoft PowerPoint 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Student "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft PowerPoint 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Powerpoint 2010 Osa 4
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Student "& Chr(40) &"english"& Chr(41) &"\Microsoft PowerPoint 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Student "& Chr(40) &"english"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft PowerPoint 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Powerpoint 2010 Osa 5
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office\Microsoft PowerPoint 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Microsoft Office")
+				Set objFolderItem = objFolder.ParseName("Microsoft PowerPoint 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft PowerPoint 2007
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office\Microsoft Office PowerPoint 2007.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office")
+				Set objFolderItem = objFolder.ParseName("Microsoft Office PowerPoint 2007.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft PowerPoint 2013
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office 2013\PowerPoint 2013.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office 2013")
+				Set objFolderItem = objFolder.ParseName("PowerPoint 2013.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Onenote 2010
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office\Microsoft OneNote 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Microsoft Office")
+				Set objFolderItem = objFolder.ParseName("Microsoft Onenote 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Onenote 2010 Osa 2
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Business "& Chr(40) &"suomi"& Chr(41) &"\Microsoft Onenote 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Business "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Onenote 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Onenote 2010 Osa 3
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Student "& Chr(40) &"suomi"& Chr(41) &"\Microsoft Onenote 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Student "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Onenote 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Onenote 2010 Osa 4
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Student "& Chr(40) &"english"& Chr(41) &"\Microsoft Onenote 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Student "& Chr(40) &"english"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Onenote 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Onenote 2007
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office\Microsoft Office Onenote 2007.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office")
+				Set objFolderItem = objFolder.ParseName("Microsoft Office Onenote 2007.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft PowerPoint 2013
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office 2013\Onenote 2013.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office 2013")
+				Set objFolderItem = objFolder.ParseName("Onenote 2013.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Outlook 2010
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office\Microsoft Outlook 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Microsoft Office")
+				Set objFolderItem = objFolder.ParseName("Microsoft Outlook 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Outlook 2010 Osa 2
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Business "& Chr(40) &"suomi"& Chr(41) &"\Microsoft Outlook 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Business "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Outlook 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Outlook 2010 Osa 3
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Student "& Chr(40) &"suomi"& Chr(41) &"\Microsoft Outlook 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Student "& Chr(40) &"suomi"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Outlook 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Outlook 2010 Osa 4
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office Home and Student "& Chr(40) &"english"& Chr(41) &"\Microsoft Outlook 2010.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office Home and Student "& Chr(40) &"english"& Chr(41))
+				Set objFolderItem = objFolder.ParseName("Microsoft Outlook 2010.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+
+			'Microsoft Outlook 2013
+			If objFSO.FileExists(strAllUsersProgramsPath & "\Microsoft Office 2013\Outlook 2013.lnk") Then
+				Set objFolder = objShell.Namespace(strAllUsersProgramsPath &"\Microsoft Office 2013")
+				Set objFolderItem = objFolder.ParseName("Outlook 2013.lnk")
+				Set colVerbs = objFolderItem.Verbs
+				For Each objVerb in colVerbs
+					If Replace(objVerb.name, "&", "") = strPinner Then objVerb.DoIt
+				Next
+			End If
+			
+			
+			'IE työpöydälle
+		    pscommand3 = """$bittisyys = $env:HomeDrive + '\Program Files (x86)'; Test-Path $bittisyys; if (Test-Path $bittisyys) { $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut($Home + '\Desktop\Internet Explorer.lnk'); $Shortcut.TargetPath = $env:HomeDrive + '\Program Files (x86)\Internet Explorer\iexplore.exe'; $Shortcut.Save(); $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut($Home + '\Desktop\Mozilla Firefox.lnk'); $Shortcut.TargetPath = $env:HomeDrive + '\Program Files (x86)\Mozilla Firefox\firefox.exe'; $Shortcut.Save(); $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut($Home + '\Desktop\Google Chrome.lnk'); $Shortcut.TargetPath = $env:HomeDrive + '\Program Files (x86)\Google\Chrome\Application\chrome.exe'; $Shortcut.Save(); } else { $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut($Home + '\Desktop\Internet Explorer.lnk'); $Shortcut.TargetPath = $env:HomeDrive + '\Program Files (x86)\Internet Explorer\iexplore.exe'; $Shortcut.Save(); $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut($Home + '\Desktop\Mozilla Firefox.lnk'); $Shortcut.TargetPath = $env:HomeDrive + '\Program Files (x86)\Mozilla Firefox\firefox.exe'; $Shortcut.Save(); $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut($Home + '\Desktop\Google Chrome.lnk'); $Shortcut.TargetPath = $env:HomeDrive + '\Program Files (x86)\Google\Chrome\Application\chrome.exe'; $Shortcut.Save(); };"""
+			cmd3 = "powershell.exe -WindowStyle Hidden -NoProfile " & pscommand3
+            Set oShell = CreateObject("WScript.Shell")
+            intReturnCode = oShell.Run(cmd3, 0, true)	
+			
+			'Computer ja My Documents työpöydälle
+
+		    Set objShell = CreateObject("WScript.Shell")
+			
+			strWrite1 = "reg delete HKEY_CLASSES_ROOT\Folder\ShellEx\ContextMenuHandlers\WinRAR /f"
+			strWrite2 = "reg delete HKEY_CLASSES_ROOT\Folder\ShellEx\ContextMenuHandlers\WinRAR32 /f"
+			strWrite3 = "reg delete HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\WinRAR /f"
+			strWrite4 = "reg delete HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\WinRAR32 /f"
+			strWrite5 = "reg delete HKEY_CLASSES_ROOT\Directory\shellex\ContextMenuHandlers\WinRAR32 /f"
+			strWrite6 = "reg delete HKEY_CLASSES_ROOT\Directory\shellex\ContextMenuHandlers\WinRAR /f"
+			strWrite7 = "reg delete " & Chr(34) & "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\Recovery" & Chr(34) & " /v " & Chr(34) & "AutoRecover" & Chr(34) & " /f"
+			strWrite8 = "reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v " & Chr(34) & "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" & Chr(34) & " /t REG_DWORD /d 0 /f"
+			strWrite9 = "reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v " & Chr(34) & "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" & Chr(34) & " /t REG_DWORD /d 0 /f"
+			strWrite10 = "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v " & Chr(34) & "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" & Chr(34) & " /t REG_DWORD /d 0 /f"
+			strWrite11 = "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v " & Chr(34) & "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" & Chr(34) & " /t REG_DWORD /d 0 /f"
+			strWrite12 = "reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v " & Chr(34) & "{59031a47-3f72-44a7-89c5-5595fe6b30ee}" & Chr(34) & " /t REG_DWORD /d 0 /f"
+			strWrite13 = "reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v " & Chr(34) & "{59031a47-3f72-44a7-89c5-5595fe6b30ee}" & Chr(34) & " /t REG_DWORD /d 0 /f"
+			strWrite14 = "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v " & Chr(34) & "{59031a47-3f72-44a7-89c5-5595fe6b30ee}" & Chr(34) & " /t REG_DWORD /d 0 /f"
+			strWrite15 = "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v " & Chr(34) & "{59031a47-3f72-44a7-89c5-5595fe6b30ee}" & Chr(34) & " /t REG_DWORD /d 0 /f"
+			strWrite16 = "reg add " & Chr(34) & "hkcu\software\microsoft\internet explorer\main" & Chr(34) & " /v " & Chr(34) & "check_associations" & Chr(34) & " /d " & Chr(34) & "yes" & Chr(34) & " /f"			
+       
+	   		objShell.Run "%comspec% /c echo " & strWrite1 & " > %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite2 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite3 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite4 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite5 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite6 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite7 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite8 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite9 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite10 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite11 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite12 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite13 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite14 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite15 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+	   		objShell.Run "%comspec% /c echo " & strWrite16 & " >> %userprofile%\Desktop\TempFixer.bat",0,true
+			
+			objShell.Run "%comspec% /c ""%userprofile%\Desktop\TempFixer.bat""",0,true	
+            objShell.run "%comspec% /c del /f /q ""%userprofile%\Desktop\TempFixer.bat""",0,false			
+			Set objShell = Nothing
+	   End Sub		
+    </script>  
+	
+    <script type="text/javascript">
+		var endOffset = 20;
+		var beginOffset = -1180;
+		var total = 1242;	
+		var endOffset2 = 500;
+		var beginOffset2 = 400;			
+		var time = 0;
+		var duration = 400;
+		var interval = 10;
+		var height = screen.height
+		var width = screen.width
+		var total2 = 0-width;	
+		
+		var sideLink1 = document.getElementById("firefox");
+		sideLink1.addEventListener("mouseover", function() { sideLinkGrowl("Asenna Firefox", "panel2", "30") }, false);
+		sideLink1.addEventListener("mouseout",  function() { sideLinkGrowl("Asenna Firefox", "panel2", "-150") }, false);
+
+		var sideLink2 = document.getElementById("chrome");
+		sideLink2.addEventListener("mouseover", function() { sideLinkGrowl("Asenna Google Chrome", "panel2", "40") }, false);
+		sideLink2.addEventListener("mouseout",  function() { sideLinkGrowl("Asenna Google Chrome", "panel2", "-150") }, false);
+
+		var sideLink3 = document.getElementById("teamviewer");
+		sideLink3.addEventListener("mouseover", function() { sideLinkGrowl("Lataa Teamviewer Työpöydälle", "panel2", "100") }, false);
+		sideLink3.addEventListener("mouseout",  function() { sideLinkGrowl("Lataa Teamviewer Työpöydälle", "panel2", "-150") }, false);
+		
+		var sideLink4 = document.getElementById("mbam");
+		sideLink4.addEventListener("mouseover", function() { sideLinkGrowl("Asenna Malwarebytes", "panel2", "160") }, false);
+		sideLink4.addEventListener("mouseout",  function() { sideLinkGrowl("Asenna Malwarebytes", "panel2", "-150") }, false);
+		
+		var sideLink5 = document.getElementById("hdtune");
+		sideLink5.addEventListener("mouseover", function() { sideLinkGrowl("Asenna HDtune", "panel2", "230") }, false);
+		sideLink5.addEventListener("mouseout",  function() { sideLinkGrowl("Asenna HDtune", "panel2", "-150") }, false);		
+		
+		var sideLink6 = document.getElementById("skype");
+		sideLink6.addEventListener("mouseover", function() { sideLinkGrowl("Asenna Skype", "panel2", "290") }, false);
+		sideLink6.addEventListener("mouseout",  function() { sideLinkGrowl("Asenna Skype", "panel2", "-150") }, false);
+				
+		var sideLink7 = document.getElementById("norton");
+		sideLink7.addEventListener("mouseover", function() { sideLinkGrowl("Poista Norton", "panel2", "350") }, false);
+		sideLink7.addEventListener("mouseout",  function() { sideLinkGrowl("Poista Norton", "panel2", "-150") }, false);
+		
+		var sideLink8 = document.getElementById("fsecure");
+		sideLink8.addEventListener("mouseover", function() { sideLinkGrowl("Poista F-Secure", "panel2", "410") }, false);
+		sideLink8.addEventListener("mouseout",  function() { sideLinkGrowl("Poista F-Secure", "panel2", "-150") }, false);
+
+		var sideLink9 = document.getElementById("mcafee");
+		sideLink9.addEventListener("mouseover", function() { sideLinkGrowl("Poista McAfee", "panel2", "480") }, false);
+		sideLink9.addEventListener("mouseout",  function() { sideLinkGrowl("Poista McAfee", "panel2", "-150") }, false);
+		
+		var sideLink10 = document.getElementById("ccleaner");
+		sideLink10.addEventListener("mouseover", function() { sideLinkGrowl("Lataa CCleaner", "panel2", "540") }, false);
+		sideLink10.addEventListener("mouseout",  function() { sideLinkGrowl("Lataa CCleaner", "panel2", "-150") }, false);	
+
+		var sideLink11 = document.getElementById("webcam");
+		sideLink11.addEventListener("mouseover", function() { sideLinkGrowl("Testaa Webbikamera", "panel2", "600") }, false);
+		sideLink11.addEventListener("mouseout",  function() { sideLinkGrowl("Testaa Webbikamera", "panel2", "-150") }, false);			
+		
+		function sideLinkGrowl(whatText, whatPanel, whatHeight) { 
+		   	whatMessage2 = "<h5>" + whatText + "</h5>";
+			moveEditor = document.getElementById(whatPanel);
+			document.getElementById(whatPanel).innerHTML=whatMessage2; 			
+			moveEditor.style.top=whatHeight + "px";	
+		}
+
+	
+        function panelHider(whatPanel, whatHeight, whatMessage, whatColor){		
+			whatMessage2 = "<h5>" + whatMessage + "</h5>";
+			whatPanel = "panel";
+			whatHeight = "30";	
+			moveEditor = document.getElementById(whatPanel);
+			document.getElementById(whatPanel).innerHTML=whatMessage2; 			
+			moveEditor.style.top=whatHeight + "px";	
+			setTimeout('resetPanel("panel","-500","Buuga Buuga","#000")',4000);	
+			setTimeout('resetPanel("panel2","-500","Buuga Buuga","#000")',4000);	
+			setTimeout('resetPanel("panel3","-500","Buuga Buuga","#000")',4000);			
+			setTimeout('resetPanel("panel4","-1000","Buuga Buuga","#000")',4000);					
+		}		
+		
+		function resetPanel(whatPanel, whatHeight, whatMessage, whatColor){
+					clearTimeout('resetPanel("panel4","-1000","Buuga Buuga","#000")',8000);		            
+					moveEditor = document.getElementById(whatPanel);				
+					moveEditor.style.top=whatHeight + "px";	
+		}	
+
+		
+		var easeInQuad = function (t, b, c, d) {
+			// return c*(t/=d)*t + b;
+			t /= d/2;
+			if (t < 1) return c/2*t*t + b;
+			t--;
+			return -c/2 * (t*(t-2) - 1) + b;
+		};
+
+
+		function easing() {
+			var currentOffset = window.pageYOffset;
+		 
+			if(time < duration && currentOffset < endOffset) {
+				var p = easeInQuad(time, beginOffset, total, duration);
+				window.moveTo(p,0); 
+				time+=interval;
+				setTimeout('easing()', interval);
+			} else {
+				time = 0;
+			}
+		}
+
+
+		function easing2() {
+			var currentOffset = window.pageXOffset;
+		 
+			if(time < duration && currentOffset < endOffset2) {
+				var p = easeInQuad(time, beginOffset2, total2, duration);
+				window.moveTo(p,0); 
+				time+=interval;
+				setTimeout('easing2()', interval);
+			} else {
+				time = 0;
+			}
+		}	
+		
+    </script>		
+</html>
